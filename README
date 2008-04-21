@@ -1,0 +1,86 @@
+OVERVIEW
+========
+This software consists of two parts, namely:
+1) a streaming server (RTSP protocol) written in C++ and,
+2) a web application interfacing with this server.
+
+The server uses the Livemedia library (http://live555.com/) and gives
+you a StreamServer class to play with. C++ tests is in the main function
+in server.cc, reading this will tell you all you need to know about how
+the server works.
+
+The Python binding is generated with Swig (http://www.swig.org/).
+Testing of the bindings is done in test.py, which is also a good read to
+see how you can use the software.
+
+The web application uses the Cherrypy Python module
+(http://cherrypy.org/) to serve pages. Furthermore, the web interface
+uses the Prototype JS framework (http://www.prototypejs.org/) to update
+the content without page reloads. Take a look in web.py to see how all
+this works.
+
+A demonstration video can be found at:
+http://athena.oderland.com/~spantzo/stream-demo/video/
+
+The software itself can be found at:
+http://athena.oderland.com/~spantzo/stream-demo/stream-demo.tar.gz
+
+
+DEPENDENCIES
+============
+You will need Python 2.5 (should work with other versions too, see
+Makefile in this case) to build this software. The Livemedia C++ library
+is included, as well as the Cherrypy web server module.
+
+Note: If you want to rebuild the Python bindings, Swig will be needed
+too.
+
+
+BUILD INSTRUCTIONS
+==================
+You should only have to type `make' to build things. To build the Python 
+bindings, type `make bindings' (this requires Swig).
+
+Building has only been tried on a few GNU/Linux boxes.
+
+
+RUNNING
+=======
+Run `python web.py' when in the top directory. This will start a
+web server on port 8080, start the streaming server and give you an
+interactive shell to play around with.
+
+You can try pointing your web browser to http://localhost:8080 and
+then type `stream.stop()', to start the streaming server again type
+`stream.run()'. You can do also things like `media = media[:-1]' to
+remove the last entry in the media play list.
+
+To get a hint on what can be done with the software, read test.py and
+web.py. The StreamServer code resides in server.cc.
+
+Note: When you wish to quit, try Ctrl+D followed by Ctrl+C. The web
+server will not terminate until you leave http://localhost:8080.
+Also, hammering Ctrl+C seems to disturb Cherrypy, causing it to never
+terminate and the program to hang.
+
+
+TESTING
+=======
+Testing is done by running `make tests'. If you want to do it manually,
+run `./server' and `python test.py' when in the top directory.
+
+Note: No output when running `./server' means that the tests passed
+withour failures.
+
+
+TODO
+====
+* If there is a need for a bigger web interface, we should consider
+  using a templating language.
+
+
+PROBLEMS
+========
+Memory leakage somewhere in the Livemedia library, not waiting for
+threads to finish correctly.
+
