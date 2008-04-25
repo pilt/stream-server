@@ -4,9 +4,8 @@
 
 import cherrypy
 from streamServer import StreamServer
-from random import randint
-from code import interact
 import os.path
+from code import interact
 
 # Let us first set up the streaming server and add some media to it.
 stream = StreamServer()
@@ -77,12 +76,11 @@ class Main:
             return html + "></ul>"
 
 def run():
-    stream.run()
     cherrypy.config.update(os.path.join(os.path.dirname(__file__), 'web.conf'))
     cherrypy.tree.mount(Main())
     cherrypy.server.quickstart()
-    cherrypy.engine.start_with_callback(lambda: interact(local=globals()))
-    stream.stop()
+    cherrypy.engine.start_with_callback(
+            lambda: stream.run(); interact(local=globals()); stream.stop())
 
 if __name__ == '__main__':
     run()

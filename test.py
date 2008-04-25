@@ -42,12 +42,6 @@ class TestStreamServer(unittest.TestCase):
         s1 = streamServer.StreamServer(8555)
         self.s.run(); s1.run(); self.s.stop(), s1.stop()
 
-    def testAddFilesToServer(self):
-        "Create an instance and add files to it"
-        self.s.addMP3("m1.mp3", self.name.new())
-        self.s.addMPEG("va1.mpg", "bar")
-        self.s.addMPEGVideo("vidonly1.mpg", "baz")
-
     def testAddAndRemoveManyFiles(self):
         "Add and remove many files to a server when it is not running"
         names = [self.name.new() for dummy in xrange(1000)]
@@ -80,17 +74,19 @@ class TestStreamServer(unittest.TestCase):
 
     def testAddFiles(self):
         "Add files to server"
+        # Add files when we are not running
         self.s.addMP3("m1.mp3", self.name.new())
+        self.s.addMPEG("va1.mpg", "bar")
+        self.s.addMPEGVideo("vidonly1.mpg", "baz")
 
+        # We can add new streams to the server when it is running. There must 
+        # not exist a stream with the same name though.
         self.s.run()
         self.s.addMP3("m1.mp3", self.name.new())
 
         # Try to add a stream with an occupied name when we are running
         self.assertRaises(streamServer.StreamServerRunError,
                           lambda: self.s.addMP3("m2.mp3", self.name.last()))
-
-        # This is OK because we are not reusing an old name
-        self.s.addMP3("m1.mp3", self.name.new())
 
         # We can reuse names when the server is not running
         self.s.stop()
