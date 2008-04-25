@@ -25,6 +25,9 @@ http://athena.oderland.com/~spantzo/stream-demo/video/
 The software itself can be found at:
 http://athena.oderland.com/~spantzo/stream-demo/stream-demo.tar.gz
 
+The software is also available on Github:
+http://github.com/pilt/stream-server/tree/master
+or: `git clone git://github.com/pilt/stream-server.git'
 
 DEPENDENCIES
 ============
