@@ -12,11 +12,12 @@ StreamServer::StreamServer(int port) throw(StreamServerError)
         TaskScheduler* scheduler = BasicTaskScheduler::createNew();
         env = BasicUsageEnvironment::createNew(*scheduler);
         rtsp = RTSPServer::createNew(*env, port, NULL, 45);
-        if (!rtsp)
+        if (rtsp == NULL)
         {
                 throw StreamServerError();
         }
 }
+
 
 StreamServer::~StreamServer()
 {
@@ -24,12 +25,13 @@ StreamServer::~StreamServer()
         env->reclaim();
 }
 
+
 typedef MPEG1or2VideoFileServerMediaSubsession MPEGVidOnly;
 typedef MPEG1or2FileServerDemux MPEG;
 typedef MP3AudioFileServerMediaSubsession MP3;
 
 #define DO_ADD_CHECKS() \
-        if (!name) \
+        if (name == NULL) \
         { \
                 name = file; \
         } \
@@ -61,6 +63,7 @@ throw(StreamServerRunError)
         rtsp->addServerMediaSession(sms);
 }
 
+
 void StreamServer::addMPEGVideo(char const* file, char const* name)
 throw(StreamServerRunError)
 {
@@ -71,6 +74,7 @@ throw(StreamServerRunError)
         sms->addSubsession(MPEGVidOnly::createNew(*env, file, False, False));
         rtsp->addServerMediaSession(sms);
 }
+
 
 void StreamServer::addMPEG(char const* file, char const* name)
 throw(StreamServerRunError)
@@ -84,6 +88,7 @@ throw(StreamServerRunError)
         sms->addSubsession(demux->newAudioServerMediaSubsession());
         rtsp->addServerMediaSession(sms);
 }
+
 
 void StreamServer::remove(char const* name) throw(StreamServerRunError)
 {
@@ -103,6 +108,7 @@ void StreamServer::remove(char const* name) throw(StreamServerRunError)
         }
 }
 
+
 void* StreamServer::listenClose(void* instance) // Will run in its own thread.
 {
         StreamServer* inst = (StreamServer*)instance;
@@ -110,12 +116,14 @@ void* StreamServer::listenClose(void* instance) // Will run in its own thread.
         return NULL;
 }
 
+
 void StreamServer::run() throw(StreamServerRunError)
 {
-        if (notRunning)
+        if (isRunning() == false)
         {
                 notRunning = 0;
-                pthread_create(&thread, NULL, StreamServer::listenClose, (void*)this);
+                pthread_create(&thread, NULL, StreamServer::listenClose,
+                               (void*)this);
         }
         else
         {
@@ -123,9 +131,10 @@ void StreamServer::run() throw(StreamServerRunError)
         }
 }
 
+
 void StreamServer::stop() throw(StreamServerRunError)
 {
-        if (notRunning)
+        if (isRunning() == false)
         {
                 throw StreamServerRunError();
         }
@@ -137,6 +146,7 @@ void StreamServer::stop() throw(StreamServerRunError)
                 //pthread_join(thread, NULL);
         }
 }
+
 
 bool StreamServer::isRunning() const
 {
@@ -157,11 +167,13 @@ throw(StreamServerNameError)
         return rtsp->rtspURL(sms);
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 // TESTS
 int main()
 {
         StreamServer stream;
+        int retval = 0;
 
         // This is how we add files to the streaming server. Both these files
         // should exist in our working directory.
@@ -192,7 +204,7 @@ int main()
         {
                 stream.remove("test_mp3_2");
         }
-        catch (StreamServerRunError) {}
+        catch (StreamServerRunError) { }
         stream.stop();
 
         // Now we can remove it.
@@ -205,7 +217,7 @@ int main()
         {
                 stream.addMP3("m2.mp3", "test_mp3");
         }
-        catch (StreamServerRunError) {}
+        catch (StreamServerRunError) { }
 
         // If the name does not exist in the database, it is OK even if the 
         // server is running.
@@ -221,7 +233,7 @@ int main()
         {
                 stream.getURL("bad");
         }
-        catch (StreamServerNameError) {}
+        catch (StreamServerNameError) { }
 
         // We can not start the server more than once in a row (same when 
         // stopping).
@@ -230,13 +242,15 @@ int main()
         {
                 stream.run();
         }
-        catch (StreamServerRunError) {}
+        catch (StreamServerRunError) { }
+
         stream.stop();
         try
         {
                 stream.stop();
         }
-        catch (StreamServerRunError) {}
+        catch (StreamServerRunError) { }
 
         return 0;
 }
+

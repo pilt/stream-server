@@ -79,8 +79,11 @@ def run():
     cherrypy.config.update(os.path.join(os.path.dirname(__file__), 'web.conf'))
     cherrypy.tree.mount(Main())
     cherrypy.server.quickstart()
-    cherrypy.engine.start_with_callback(
-            lambda: stream.run(); interact(local=globals()); stream.stop())
+    def callbacks():
+        stream.run()
+        interact(local=globals())
+        stream.stop()
+    cherrypy.engine.start_with_callback(callbacks)
 
 if __name__ == '__main__':
     run()

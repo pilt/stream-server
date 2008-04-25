@@ -2713,16 +2713,6 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-  #define SWIG_From_long   PyInt_FromLong 
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_int  (int value)
-{    
-  return SWIG_From_long  (value);
-}
-
-
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -3043,28 +3033,6 @@ SWIGINTERN PyObject *_wrap_delete_StreamServer(PyObject *SWIGUNUSEDPARM(self), P
   delete arg1;
   
   resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_StreamServer_port_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  StreamServer *arg1 = (StreamServer *) 0 ;
-  int result;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:StreamServer_port_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_StreamServer, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StreamServer_port_get" "', argument " "1"" of type '" "StreamServer *""'"); 
-  }
-  arg1 = reinterpret_cast< StreamServer * >(argp1);
-  result = (int)(int) ((arg1)->port);
-  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -3398,7 +3366,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"StreamServerNameError_swigregister", StreamServerNameError_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_StreamServer", _wrap_new_StreamServer, METH_VARARGS, NULL},
 	 { (char *)"delete_StreamServer", _wrap_delete_StreamServer, METH_VARARGS, NULL},
-	 { (char *)"StreamServer_port_get", _wrap_StreamServer_port_get, METH_VARARGS, NULL},
 	 { (char *)"StreamServer_addMP3", _wrap_StreamServer_addMP3, METH_VARARGS, NULL},
 	 { (char *)"StreamServer_addMPEGVideo", _wrap_StreamServer_addMPEGVideo, METH_VARARGS, NULL},
 	 { (char *)"StreamServer_addMPEG", _wrap_StreamServer_addMPEG, METH_VARARGS, NULL},

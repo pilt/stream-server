@@ -105,8 +105,6 @@ class StreamServer(_object):
         except: self.this = this
     __swig_destroy__ = _streamServer.delete_StreamServer
     __del__ = lambda self : None;
-    __swig_getmethods__["port"] = _streamServer.StreamServer_port_get
-    if _newclass:port = _swig_property(_streamServer.StreamServer_port_get)
     def addMP3(*args): return _streamServer.StreamServer_addMP3(*args)
     def addMPEGVideo(*args): return _streamServer.StreamServer_addMPEGVideo(*args)
     def addMPEG(*args): return _streamServer.StreamServer_addMPEG(*args)
