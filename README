@@ -73,7 +73,7 @@ Testing is done by running `make tests'. If you want to do it manually,
 run `./server' and `python test.py' when in the top directory.
 
 Note: No output when running `./server' means that the tests passed
-withour failures.
+without failures.
 
 
 TODO
