@@ -3,7 +3,7 @@
 # See COPYING for details.
 
 import cherrypy
-from streamServer import StreamServer
+from streamserver import StreamServer
 import os.path
 from code import interact
 

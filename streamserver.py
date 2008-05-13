@@ -4,7 +4,7 @@
 # Don't modify this file, modify the SWIG interface instead.
 # This file is compatible with both classic and new-style classes.
 
-import _streamServer
+import _streamserver
 import new
 new_instancemethod = new.instancemethod
 try:
@@ -55,12 +55,12 @@ class StreamServerError:
     __getattr__ = lambda self, name: _swig_getattr(self, StreamServerError, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _streamServer.new_StreamServerError(*args)
+        this = _streamserver.new_StreamServerError(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _streamServer.delete_StreamServerError
+    __swig_destroy__ = _streamserver.delete_StreamServerError
     __del__ = lambda self : None;
-StreamServerError_swigregister = _streamServer.StreamServerError_swigregister
+StreamServerError_swigregister = _streamserver.StreamServerError_swigregister
 StreamServerError_swigregister(StreamServerError)
 
 class StreamServerRunError:
@@ -70,12 +70,12 @@ class StreamServerRunError:
     __getattr__ = lambda self, name: _swig_getattr(self, StreamServerRunError, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _streamServer.new_StreamServerRunError(*args)
+        this = _streamserver.new_StreamServerRunError(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _streamServer.delete_StreamServerRunError
+    __swig_destroy__ = _streamserver.delete_StreamServerRunError
     __del__ = lambda self : None;
-StreamServerRunError_swigregister = _streamServer.StreamServerRunError_swigregister
+StreamServerRunError_swigregister = _streamserver.StreamServerRunError_swigregister
 StreamServerRunError_swigregister(StreamServerRunError)
 
 class StreamServerNameError:
@@ -85,12 +85,12 @@ class StreamServerNameError:
     __getattr__ = lambda self, name: _swig_getattr(self, StreamServerNameError, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _streamServer.new_StreamServerNameError(*args)
+        this = _streamserver.new_StreamServerNameError(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _streamServer.delete_StreamServerNameError
+    __swig_destroy__ = _streamserver.delete_StreamServerNameError
     __del__ = lambda self : None;
-StreamServerNameError_swigregister = _streamServer.StreamServerNameError_swigregister
+StreamServerNameError_swigregister = _streamserver.StreamServerNameError_swigregister
 StreamServerNameError_swigregister(StreamServerNameError)
 
 class StreamServer(_object):
@@ -100,20 +100,20 @@ class StreamServer(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, StreamServer, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _streamServer.new_StreamServer(*args)
+        this = _streamserver.new_StreamServer(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _streamServer.delete_StreamServer
+    __swig_destroy__ = _streamserver.delete_StreamServer
     __del__ = lambda self : None;
-    def addMP3(*args): return _streamServer.StreamServer_addMP3(*args)
-    def addMPEGVideo(*args): return _streamServer.StreamServer_addMPEGVideo(*args)
-    def addMPEG(*args): return _streamServer.StreamServer_addMPEG(*args)
-    def run(*args): return _streamServer.StreamServer_run(*args)
-    def stop(*args): return _streamServer.StreamServer_stop(*args)
-    def remove(*args): return _streamServer.StreamServer_remove(*args)
-    def getURL(*args): return _streamServer.StreamServer_getURL(*args)
-    def isRunning(*args): return _streamServer.StreamServer_isRunning(*args)
-StreamServer_swigregister = _streamServer.StreamServer_swigregister
+    def addMP3(*args): return _streamserver.StreamServer_addMP3(*args)
+    def addMPEGVideo(*args): return _streamserver.StreamServer_addMPEGVideo(*args)
+    def addMPEG(*args): return _streamserver.StreamServer_addMPEG(*args)
+    def run(*args): return _streamserver.StreamServer_run(*args)
+    def stop(*args): return _streamserver.StreamServer_stop(*args)
+    def remove(*args): return _streamserver.StreamServer_remove(*args)
+    def getURL(*args): return _streamserver.StreamServer_getURL(*args)
+    def isRunning(*args): return _streamserver.StreamServer_isRunning(*args)
+StreamServer_swigregister = _streamserver.StreamServer_swigregister
 StreamServer_swigregister(StreamServer)
 
 

@@ -24,7 +24,7 @@ LDFLAGS += -lpython2.5
 SRCS = $(wildcard *.cc)
 OBJS = $(SRCS:.cc=.o)
 EXE = server
-SHARED = _streamServer.so
+SHARED = _streamserver.so
 
 all: live $(SRCS) $(EXE) $(SHARED)
 RM=rm
@@ -33,7 +33,7 @@ tests: all
 %.o: %.cc
 	$(CXX) -c -o $*.o $(CXXFLAGS) $*.cc
 
-_streamServer.so: $(OBJS)
+_streamserver.so: $(OBJS)
 	$(CXX) -fPIC -shared -o $@ $(OBJS) $(LDFLAGS)
 
 $(EXE): $(OBJS)

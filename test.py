@@ -2,7 +2,7 @@
 # Copyright (C) 2008 Simon Pantzare
 # See COPYING for details.
 
-import streamServer
+import streamserver
 import unittest
 
 class NameGenerator:
@@ -17,7 +17,7 @@ class NameGenerator:
 
 
 class TestStreamServer(unittest.TestCase):
-    s = streamServer.StreamServer()
+    s = streamserver.StreamServer()
     name = NameGenerator()
 
     def setUp(self):
@@ -34,12 +34,12 @@ class TestStreamServer(unittest.TestCase):
 
     def testTwoInstancesSamePort(self):
         "Try to create two instances on the same port"
-        self.assertRaises(streamServer.StreamServerError, 
-                          lambda: streamServer.StreamServer())
+        self.assertRaises(streamserver.StreamServerError, 
+                          lambda: streamserver.StreamServer())
 
     def testTwoInstancesNotSamePort(self):
         "Create two instances on different ports and start and stop them"
-        s1 = streamServer.StreamServer(8555)
+        s1 = streamserver.StreamServer(8555)
         self.s.run(); s1.run(); self.s.stop(), s1.stop()
 
     def testAddAndRemoveManyFiles(self):
@@ -66,7 +66,7 @@ class TestStreamServer(unittest.TestCase):
         # Then we start the server and try to remove this file, this
         # should raise an exception
         self.s.run()
-        self.assertRaises(streamServer.StreamServerRunError,
+        self.assertRaises(streamserver.StreamServerRunError,
                           lambda: self.s.remove(self.name.last()))
 
         self.s.remove(self.name.new())
@@ -85,7 +85,7 @@ class TestStreamServer(unittest.TestCase):
         self.s.addMP3("m1.mp3", self.name.new())
 
         # Try to add a stream with an occupied name when we are running
-        self.assertRaises(streamServer.StreamServerRunError,
+        self.assertRaises(streamserver.StreamServerRunError,
                           lambda: self.s.addMP3("m2.mp3", self.name.last()))
 
         # We can reuse names when the server is not running
@@ -95,10 +95,10 @@ class TestStreamServer(unittest.TestCase):
     def testStartTwice(self):
         "It is not allowed to start or stop a server twice in a row"
         self.s.run()
-        self.assertRaises(streamServer.StreamServerRunError,
+        self.assertRaises(streamserver.StreamServerRunError,
                           lambda: self.s.run())
         self.s.stop()
-        self.assertRaises(streamServer.StreamServerRunError,
+        self.assertRaises(streamserver.StreamServerRunError,
                           lambda: self.s.stop())
 
 

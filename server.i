@@ -1,4 +1,4 @@
-%module streamServer
+%module streamserver
 
 %{
 #include "server.h"

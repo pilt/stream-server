@@ -2484,11 +2484,11 @@ static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
 #endif
 
 /*-----------------------------------------------
-              @(target):= _streamServer.so
+              @(target):= _streamserver.so
   ------------------------------------------------*/
-#define SWIG_init    init_streamServer
+#define SWIG_init    init_streamserver
 
-#define SWIG_name    "_streamServer"
+#define SWIG_name    "_streamserver"
 
 #define SWIGVERSION 0x010331 
 #define SWIG_VERSION SWIGVERSION
